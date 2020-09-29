@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class IpotekaPage extends BasePage {
     @FindBy(xpath = "//div[@class = 'kit-col_xs_12 kit-col_md_0 kit-col_lg_6 kit-col_xs-bottom_20 kit-col_lg-bottom_10 kit-col_xs-top_20 kit-col_lg-top_40']/h1")
     WebElement title;
-    @FindBy(xpath = "//b[text()='Подать заявку']")
+    @FindBy(xpath = "//a[@class='kit-button  kit-button_default kit-button_type_big analytics-button']")
     WebElement button;
     @Тогда("Проверяем переход на страницу")
     public IpotekaPage checkTitle() {
