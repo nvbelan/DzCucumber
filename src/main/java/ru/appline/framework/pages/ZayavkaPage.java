@@ -16,7 +16,7 @@ import java.util.List;
 public class ZayavkaPage extends BasePage {
     @FindBy(xpath = "//h1[@class='shell_commonHeadingHeader']")
     WebElement title;
-    @FindBy(xpath = "//div[@data-label='Цель кредита']//input[@class='dc-input__input-4-7-0']")
+    @FindBy(xpath = "//div[@data-label='Цель кредита']//input[@class='dc-input__input-4-7-1']")
     WebElement loanPurpose;
     @FindBy(xpath = "//span[text()='Есть зарплатная карта Сбербанка']/..//input")
     WebElement sWitchCard;
