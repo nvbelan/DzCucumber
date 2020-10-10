@@ -2,12 +2,11 @@ package steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 
 import ru.appline.framework.managers.InitManager;
 import ru.appline.framework.utils.ScreenshotUtil;
 
-import static io.qameta.allure.Allure.getLifecycle;
+import java.io.IOException;
 
 public class Hooks {
 
@@ -17,10 +16,7 @@ public class Hooks {
     }
 
     @After
-    public void afterEach(Scenario scenario) {
-        if (scenario.isFailed()) {
-            getLifecycle().addAttachment("Скриншот","image/png",null, ScreenshotUtil.addScreenshot());
-        }
-        InitManager.quitFramework();
+    public void afterEach() {
+//        InitManager.quitFramework();
     }
 }

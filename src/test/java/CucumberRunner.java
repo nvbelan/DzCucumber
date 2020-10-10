@@ -4,10 +4,11 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
+        plugin = {"ru.appline.framework.utils.ScreenshotUtil",
                 "progress",
                 "summary"},
         glue = {"steps"},
+        tags = {"@ui"},
         features = {"src/test/resources/"}
 )
 public class CucumberRunner {

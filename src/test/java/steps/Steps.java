@@ -2,74 +2,86 @@ package steps;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.ru.Когда;
-import io.cucumber.java.ru.Тогда;
+import io.qameta.allure.Allure;
+import io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm;
 import ru.appline.framework.managers.ManagerPages;
+
+import java.io.IOException;
+import java.util.List;
+
+import static ru.appline.framework.utils.ScreenshotUtil.getBytesAnnotationWithArgs;
 
 public class Steps {
     private ManagerPages app = ManagerPages.getManagerPages();
 
-    @Когда("^Выбираем меню Ипотека$")
-    public void step1() {
-        System.out.println(1);
-        app.getStartPage().selectMenuIpoteka();
+    @Когда("^Вводим в поле поиска: (.+)$")
+    public void step1(String search) {
+        app.getStartPage().searchfill(search);
+
     }
 
-    @Когда("Выбираем подменю Ипотека на готовое жильё")
-    public void step2() {
-
-        System.out.println(2);
-        app.getStartPage().selectSecMenu();
+    @Когда("^Ограничиваем цену товара (от|до) ([0-9]+) рублей$")
+    public void step2(String namefill, String value) {
+        app.getSearchPage().setCost(namefill, value);
     }
 
-    @Тогда("Проверяем переход на страницу")
-    public void step3() {
-        System.out.println(3);
-        app.getIpotekaPage().checkTitle();
+    @Когда("^Выбор беспроводных технологий  (.+) (true|false)$")
+    public void step3(String fill, boolean y) {
+        app.getSearchPage().setNoProvod(fill, y);
+    }
+    @Когда("^Установить ползунок Высокий рейтинг (true|false)$")
+    public void step4(boolean y) {
+        app.getSearchPage().setRaiting(y);
     }
 
-    @Когда("Нажимаем кнопку Подать заявку")
-    public void step4() {
-
-        System.out.println(4);
-        app.getIpotekaPage().pushButtonZayavka();
+    @Когда("^Добавить четных продуктов ([[0-9]+]||все)$")
+    public void step5(String count) {
+        app.getSearchPage().addToCart(count);
     }
-
-    @Тогда("Проверяем заголовок Выберите программу и рассчитайте условия")
-    public void step5() {
-
-        app.getZayavkaPage().checkTitle();
-    }
-
-    @Тогда("Проверяем цель кредита")
+    @Когда("^Сгенерировать файл$")
     public void step6() {
-        System.out.println(5);
-        app.getZayavkaPage().checkAndSetLoanPurpose();
+
+        app.getSearchPage().genTXT();
+        try {
+            Allure.getLifecycle().addAttachment("filen","text/plain",null,getBytesAnnotationWithArgs());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Когда("Проверяем и устанавливаем переключатели")
-    public void step7(DataTable dataTable) {
-        System.out.println(6);
-        dataTable.cells().forEach(raw -> {
-                    app.getZayavkaPage().setSwitch(raw.get(0), raw.get(1));
-                }
-        );
+    @Когда("^Перейти в корзину$")
+    public void step7() {
+        app.getSearchPage().clickToBusket();
     }
 
-    @Когда("Заполняем поля")
-    public void step8(DataTable dataTable) {
-        System.out.println(7);
-        dataTable.cells().forEach(raw -> {
-                    app.getZayavkaPage().fillValue(raw.get(0), raw.get(1));
-                }
-        );
+    @Когда("^Проверить наименование товаров$")
+    public void step8() {
+        app.getBasketPage().checkProdName();
     }
 
-    @Тогда("Проверяем поля")
-    public void step9(DataTable dataTable) {
-        dataTable.cells().forEach(raw -> {
-                    app.getZayavkaPage().checkFills(raw.get(0), raw.get(1), raw.get(2));
-                }
-        );
+    @Когда("^Проверить количество товаров в корзине$")
+    public void step9() {
+        app.getBasketPage().countP();
     }
+    @Когда("^Удалить элементы из корзины$")
+    public void step10() {
+        app.getBasketPage().jmakButton();
+    }
+    @Когда("^Проверяем заголовок: (.*)$")
+    public void step11(String value) {
+        app.getBasketPage().empKor(value);
+    }
+    @Когда("^Выбираем категории$")
+    public void step12() {
+        app.getSearchPage().katSel();
+    }
+    @Когда("^Выбираем бренды (.*) (.*)$")
+    public void step13(String a, String b){
+        app.getSearchPage().setBrands(a,b);
+    }
+
+
+
+
 }
 

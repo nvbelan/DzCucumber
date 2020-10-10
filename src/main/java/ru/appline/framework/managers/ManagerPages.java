@@ -11,14 +11,8 @@ public class ManagerPages {
 
     StartPage startPage;
 
-
-    IpotekaPage ipotekaPage;
-
-
-    ZayavkaPage zayavkaPage;
-
-
-
+    SearchPage searchPage;
+    BasketPage basketPage;
 
     private ManagerPages() {
     }
@@ -38,20 +32,18 @@ public class ManagerPages {
         return startPage;
     }
 
-
-    public IpotekaPage getIpotekaPage() {
-        if (ipotekaPage == null) {
-            ipotekaPage = new IpotekaPage();
+    public SearchPage getSearchPage() {
+        if (searchPage == null) {
+            searchPage = new SearchPage();
         }
-        return ipotekaPage;
+        return searchPage;
     }
 
-
-    public ZayavkaPage getZayavkaPage() {
-        if (zayavkaPage == null) {
-            zayavkaPage = new ZayavkaPage();
+    public BasketPage getBasketPage() {
+        if (basketPage == null) {
+            basketPage = new BasketPage();
         }
-        return zayavkaPage;
+        return basketPage;
     }
 }
 
